@@ -5,9 +5,10 @@
 class DirectX
 {
 private:
+	D3DPRESENT_PARAMETERS	d3dpp;
 	LPDIRECT3D9 pD3d;
 	LPDIRECT3DDEVICE9 pDevice;
-	std::vector<Graphic> mGraphics;
+	std::vector<Graphic*> mGraphics;
 public:
 	DirectX(HWND hWnd);
 	~DirectX();
@@ -16,6 +17,7 @@ public:
 	LPDIRECT3DDEVICE9 GetDirectDevice() { return pDevice; }
 
 	void Render();
+	void Draw();
 	void SetGraphic();
 };
 
