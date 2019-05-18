@@ -1,4 +1,5 @@
 #include "DirectX.h"
+#include "IndexBuffer.h"
 
 DirectX::DirectX(HWND hWnd)
 : pD3d(NULL)
@@ -27,9 +28,7 @@ HRESULT DirectX::InitD3d(HWND hWnd)
 		return E_FAIL;
 	}
 
-	D3DPRESENT_PARAMETERS d3dpp;
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
-
 	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
 	d3dpp.BackBufferCount = 1;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
@@ -58,19 +57,24 @@ HRESULT DirectX::InitD3d(HWND hWnd)
 
 void DirectX::Render()
 {
-	pDevice->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 255), 1.0f, 0);
+	pDevice->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 	pDevice->BeginScene();
 
-	for (int i = 0; i < mGraphics.size(); i++)
-	{
-		mGraphics[i].Draw();
-	}
+	Draw();
 
 	pDevice->EndScene();
 	pDevice->Present(NULL, NULL, NULL, NULL);
 }
 
+void DirectX::Draw()
+{
+	for (int i = 0; i < mGraphics.size(); i++)
+	{
+		mGraphics[i]->Draw();
+	}
+}
+
 void DirectX::SetGraphic()
 {
-	mGraphics.push_back(Graphic(pDevice));
+	mGraphics.push_back(new IndexBuffer(pDevice));
 }
