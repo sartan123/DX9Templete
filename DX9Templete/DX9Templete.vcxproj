@@ -147,17 +147,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DirectX.cpp" />
-    <ClCompile Include="Graphic.cpp" />
-    <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="App.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stddef.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DirectX.h" />
-    <ClInclude Include="Graphic.h" />
-    <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="App.h" />
     <ClInclude Include="stddef.h" />
+    <ClInclude Include="TeapotModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
