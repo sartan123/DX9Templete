@@ -1,7 +1,8 @@
 #pragma once
+#include "stddef.h"
+#include "Sprite.h"
 #include <d3d9.h>
-#include <DirectXMath.h>
-#include <DirectXPackedVector.h>
+#include <d3dx9.h>
 
 class App
 {
@@ -9,15 +10,10 @@ private:
 	D3DPRESENT_PARAMETERS	d3dpp;
 	IDirect3D9Ex* pD3d;
 	IDirect3DDevice9Ex* pDevice;
+
+	std::vector<Sprite> mSprites;
+
 public:
-	template<class T>
-	void SafeRelease(T p) {
-		if (p)
-		{
-			p->Release();
-			p = nullptr;
-		}
-	}
 	enum ScreenMode
 	{
 		WindowMode,
@@ -30,6 +26,8 @@ public:
 
 	void Render();
 	void Terminate();
+
+	void InitializeResource();
 	
 };
 

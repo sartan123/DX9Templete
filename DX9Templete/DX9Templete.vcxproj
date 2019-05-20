@@ -149,10 +149,12 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stddef.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="stddef.h" />
     <ClInclude Include="TeapotModel.h" />
   </ItemGroup>

@@ -9,6 +9,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
 	PAINTSTRUCT ps;
+	
 	switch (iMsg)
 	{
 	case WM_DESTROY:
