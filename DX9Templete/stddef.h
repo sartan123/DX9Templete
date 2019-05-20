@@ -3,7 +3,17 @@
 
 #include <windows.h>
 #include <tchar.h>
-#include <d3dx9.h>
+#include <stdexcept>
+#include <vector>
 
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
+
+template<class T>
+void SafeRelease(T p) {
+	if (p)
+	{
+		p->Release();
+		p = nullptr;
+	}
+}

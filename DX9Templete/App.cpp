@@ -1,5 +1,4 @@
 #include "App.h"
-#include <stdexcept>
 
 App::App()
 : pD3d(nullptr)
@@ -77,6 +76,9 @@ bool App::Initialize(HWND hWnd, int Width, int Height, ScreenMode mode)
 		{
 			throw std::runtime_error("failed CreateDeviceEx");
 		}
+
+		InitializeResource();
+
 	}
 	catch (std::runtime_error e)
 	{
@@ -91,6 +93,14 @@ void App::Render()
 	DWORD dwClearFlags = D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL;
 	DWORD dwClearColor = D3DCOLOR_RGBA(0x40, 0x80, 0xff, 0x00);
 	pDevice->Clear(0, nullptr, dwClearFlags, dwClearColor, 1.0f, 0);
+	pDevice->BeginScene();
+
+	for (int i = 0; i < mSprites.size(); i++)
+	{
+		mSprites[i].Draw(pDevice);
+	}
+
+	pDevice->EndScene();
 	pDevice->PresentEx(nullptr, nullptr, nullptr, nullptr, NULL);
 }
 
@@ -98,4 +108,16 @@ void App::Terminate()
 {
 	SafeRelease(pDevice);
 	SafeRelease(pD3d);
+}
+
+void App::InitializeResource()
+{
+	Sprite sprite;
+	sprite.LoadTexture(pDevice, "BackGround.png");
+	Sprite sprite2;
+	sprite2.LoadTexture(pDevice, "sample0003.bmp");
+	sprite2.SetPosition(300, 300);
+
+	mSprites.push_back(sprite);
+	mSprites.push_back(sprite2);
 }
