@@ -1,6 +1,7 @@
 #pragma once
 #include "stddef.h"
 #include "Sprite.h"
+#include "MaterialMesh.h"
 #include <d3d9.h>
 #include <d3dx9.h>
 
@@ -12,7 +13,7 @@ private:
 	IDirect3DDevice9Ex* pDevice;
 
 	std::vector<Sprite> mSprites;
-
+	MaterialMesh* mMesh;
 public:
 	enum ScreenMode
 	{
@@ -28,6 +29,6 @@ public:
 	void Terminate();
 
 	void InitializeResource();
-	
+	void DrawAllResource();
 };
 
