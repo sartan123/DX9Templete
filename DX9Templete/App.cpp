@@ -95,10 +95,7 @@ void App::Render()
 	pDevice->Clear(0, nullptr, dwClearFlags, dwClearColor, 1.0f, 0);
 	pDevice->BeginScene();
 
-	for (int i = 0; i < mSprites.size(); i++)
-	{
-		mSprites[i].Draw(pDevice);
-	}
+	DrawAllResource();
 
 	pDevice->EndScene();
 	pDevice->PresentEx(nullptr, nullptr, nullptr, nullptr, NULL);
@@ -112,12 +109,15 @@ void App::Terminate()
 
 void App::InitializeResource()
 {
-	Sprite sprite;
-	sprite.LoadTexture(pDevice, "BackGround.png");
-	Sprite sprite2;
-	sprite2.LoadTexture(pDevice, "sample0003.bmp");
-	sprite2.SetPosition(300, 300);
+	mMesh = new MaterialMesh();
+	mMesh->Initialize(pDevice);
+}
 
-	mSprites.push_back(sprite);
-	mSprites.push_back(sprite2);
+void App::DrawAllResource()
+{
+	for (int i = 0; i < mSprites.size(); i++)
+	{
+		mSprites[i].Draw(pDevice);
+	}
+	mMesh->Draw(pDevice);
 }
