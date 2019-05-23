@@ -13,7 +13,6 @@ public:
 	MaterialMesh();
 	~MaterialMesh();
 	HRESULT Initialize(IDirect3DDevice9* pDevice);
-	void SetMatrices(IDirect3DDevice9* pDevice);
 	void Draw(IDirect3DDevice9* pDevice);
 };
 
