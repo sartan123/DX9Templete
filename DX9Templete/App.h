@@ -3,6 +3,7 @@
 #include "Sprite.h"
 #include "MaterialMesh.h"
 #include "Camera.h"
+#include "TextFont.h"
 #include <d3d9.h>
 #include <d3dx9.h>
 
@@ -19,6 +20,7 @@ private:
 	std::vector<Sprite> mSprites;
 	MaterialMesh* mMesh;
 	Camera* mCamera;
+	TextFont* mTextFont;
 
 	DWORD timeBefore;
 	DWORD fps;

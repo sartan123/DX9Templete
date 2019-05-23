@@ -116,6 +116,9 @@ void App::InitializeResource()
 
 	mCamera = new Camera(pDevice);
 	mCamera->SetMatrices();
+
+	mTextFont = new TextFont("Test");
+	mTextFont->Initialize(pDevice);
 }
 
 void App::DrawAllResource()
@@ -126,6 +129,7 @@ void App::DrawAllResource()
 	}
 	mMesh->Draw(pDevice);
 	mCamera->Update();
+	mTextFont->Draw();
 }
 
 void App::run() {
@@ -134,7 +138,7 @@ void App::run() {
 #ifdef _DEBUG // デバッグ用(デバッガにFSP出す)
 		std::stringstream stream;
 		stream << fps << " FPS" << std::endl;
-		OutputDebugString(stream.str().c_str());
+		mTextFont->ChangeText(TEXT(stream.str().c_str()));
 #endif
 		fps = 0;
 		timeBefore = GetTickCount();

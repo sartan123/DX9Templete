@@ -153,6 +153,7 @@
     <ClCompile Include="MaterialMesh.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stddef.cpp" />
+    <ClCompile Include="TextFont.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="MaterialMesh.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="stddef.h" />
+    <ClInclude Include="TextFont.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
