@@ -2,8 +2,12 @@
 #include "stddef.h"
 #include "Sprite.h"
 #include "MaterialMesh.h"
+#include "Camera.h"
 #include <d3d9.h>
 #include <d3dx9.h>
+
+#define TIMER_ID 1
+#define FREAM_RATE (1000 / 60)
 
 class App
 {
@@ -14,6 +18,10 @@ private:
 
 	std::vector<Sprite> mSprites;
 	MaterialMesh* mMesh;
+	Camera* mCamera;
+
+	DWORD timeBefore;
+	DWORD fps;
 public:
 	enum ScreenMode
 	{
@@ -30,5 +38,7 @@ public:
 
 	void InitializeResource();
 	void DrawAllResource();
+
+	void run();
 };
 

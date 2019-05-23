@@ -48,26 +48,7 @@ HRESULT MaterialMesh::Initialize(IDirect3DDevice9* pDevice)
 	return S_OK;
 }
 
-void MaterialMesh::SetMatrices(IDirect3DDevice9* pDevice)
-{
-	D3DXMATRIXA16 matWorld;
-	D3DXMatrixRotationY(&matWorld, timeGetTime() / 1000.0f);
-	pDevice->SetTransform(D3DTS_WORLD, &matWorld);
-
-	D3DXVECTOR3 vEyePt(0.0f, 3.0f, -5.0f);
-	D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
-	D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
-	D3DXMATRIXA16 matView;
-	D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
-	pDevice->SetTransform(D3DTS_VIEW, &matView);
-
-	D3DXMATRIXA16 matProj;
-	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 4, 1.0f, 1.0f, 100.0f);
-	pDevice->SetTransform(D3DTS_PROJECTION, &matProj);
-}
-
 void MaterialMesh::Draw(IDirect3DDevice9* pDevice)
 {
-	SetMatrices(pDevice);
 	pMesh->DrawSubset(0);
 }

@@ -5,6 +5,21 @@
 #define WINDOW_HEIGHT 600
 LPCTSTR szAppName = "Direct3D Templete";
 
+App app;
+
+VOID CALLBACK TimerProc(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime) {
+	HDC hdc;
+	static int iCount = 0;
+	TCHAR strCount[64];
+
+	iCount++;
+
+	hdc = GetDC(hwnd);
+	wsprintf(strCount, "%d", iCount);
+	TextOut(hdc, 10, 10, strCount, lstrlen(strCount));
+	ReleaseDC(hwnd, hdc);
+}
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
@@ -15,6 +30,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
+	case WM_CREATE:
+		SetTimer(hWnd, 1, 100, NULL);
+		return 0;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 		EndPaint(hWnd, &ps);
@@ -26,6 +44,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			PostQuitMessage(0);
 			break;
 		}
+	case WM_TIMER:
+		app.run();
+		break;
 	}
 	return DefWindowProc(hWnd, iMsg, wParam, lParam);
 }
@@ -138,7 +159,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR szStr, IN
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
 
-	App app;
 	app.Initialize(hWnd, WINDOW_WIDTH, WINDOW_HEIGHT, screenMode);
 
 	MSG msg;

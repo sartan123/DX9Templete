@@ -3,6 +3,8 @@
 App::App()
 : pD3d(nullptr)
 , pDevice(nullptr)
+, timeBefore(0)
+, fps(0)
 {
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
 }
@@ -111,6 +113,9 @@ void App::InitializeResource()
 {
 	mMesh = new MaterialMesh();
 	mMesh->Initialize(pDevice);
+
+	mCamera = new Camera(pDevice);
+	mCamera->SetMatrices();
 }
 
 void App::DrawAllResource()
@@ -120,4 +125,18 @@ void App::DrawAllResource()
 		mSprites[i].Draw(pDevice);
 	}
 	mMesh->Draw(pDevice);
+	mCamera->Update();
+}
+
+void App::run() {
+	++fps;
+	if ((GetTickCount() - timeBefore) >= 1000) { 
+#ifdef _DEBUG // デバッグ用(デバッガにFSP出す)
+		std::stringstream stream;
+		stream << fps << " FPS" << std::endl;
+		OutputDebugString(stream.str().c_str());
+#endif
+		fps = 0;
+		timeBefore = GetTickCount();
+	}
 }
