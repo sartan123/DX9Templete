@@ -189,6 +189,5 @@ void App::UpdateInput()
 			mCamera->MovePositionX(x);
 			mCamera->MovePositionY(y);
 		}
-
 	}
 }
