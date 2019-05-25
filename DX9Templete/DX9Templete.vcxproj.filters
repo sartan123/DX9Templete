@@ -1,62 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Source">
+      <UniqueIdentifier>{900585f1-d5fa-424a-922e-5ef3821b6c28}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{c5b06415-3d5e-4f43-8664-97c38ea94313}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\App.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="stddef.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="App.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\InputDevice.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="MaterialMesh.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\MaterialMesh.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\Sprite.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="TextFont.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\stddef.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="InputDevice.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\TextFont.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stddef.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="src\App.h">
+      <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="App.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="src\InputDevice.h">
+      <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="MaterialMesh.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="src\MaterialMesh.h">
+      <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="src\Sprite.h">
+      <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="TextFont.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="src\stddef.h">
+      <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="InputDevice.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="src\TextFont.h">
+      <Filter>Source</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\BackGround.png">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="resource\sample0003.bmp">
+      <Filter>Resource</Filter>
+    </Image>
   </ItemGroup>
 </Project>

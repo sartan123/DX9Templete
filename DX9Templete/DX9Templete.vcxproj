@@ -18,6 +18,29 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\InputDevice.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MaterialMesh.cpp" />
+    <ClCompile Include="src\Sprite.cpp" />
+    <ClCompile Include="src\stddef.cpp" />
+    <ClCompile Include="src\TextFont.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\App.h" />
+    <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\InputDevice.h" />
+    <ClInclude Include="src\MaterialMesh.h" />
+    <ClInclude Include="src\Sprite.h" />
+    <ClInclude Include="src\stddef.h" />
+    <ClInclude Include="src\TextFont.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\BackGround.png" />
+    <Image Include="resource\sample0003.bmp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{C49A535D-36C8-4836-A2F3-B95EDD271FE5}</ProjectGuid>
@@ -146,25 +169,6 @@
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="App.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="InputDevice.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MaterialMesh.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="stddef.cpp" />
-    <ClCompile Include="TextFont.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="App.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="InputDevice.h" />
-    <ClInclude Include="MaterialMesh.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="stddef.h" />
-    <ClInclude Include="TextFont.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
