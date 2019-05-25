@@ -24,7 +24,9 @@ class InputDevice
 private:
 	LPDIRECTINPUT8 pInputInterface;
 	LPDIRECTINPUTDEVICE8 pKeyDevice;
-	INPUTSTATE mInputState;
+	LPDIRECTINPUTDEVICE8 pMouseDevice;
+	DIMOUSESTATE mMouseState;
+	INPUTSTATE mKeyState;
 public:
 	InputDevice();
 	~InputDevice();
@@ -35,5 +37,9 @@ public:
 	bool GetKeyDown(DWORD key_code);
 	bool GetKeyUp(DWORD key_code);
 
+	void GetMouseState();
+	bool IsClickRightMouse();
+	int GetMouseStateX();
+	int GetMouseStateY();
 };
 

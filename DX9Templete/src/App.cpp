@@ -179,4 +179,11 @@ void App::UpdateInput()
 	{
 		mCamera->MovePositionX(-mInterval);
 	}
+	else if (mInput->IsClickRightMouse())
+	{
+			int x = mInput->GetMouseStateX();
+			int y = mInput->GetMouseStateY();
+			mCamera->MovePositionX(x);
+			mCamera->MovePositionY(y);
+	}
 }
