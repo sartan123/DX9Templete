@@ -8,7 +8,6 @@ class MaterialMesh
 private:
 	D3DMATERIAL9 material;
 	ID3DXMesh *pMesh;
-	D3DLIGHT9 light;
 public:
 	MaterialMesh();
 	~MaterialMesh();

@@ -3,8 +3,10 @@
 App::App()
 : pD3d(nullptr)
 , pDevice(nullptr)
+, mInput(nullptr)
 , timeBefore(0)
 , fps(0)
+, mInterval(0.5f)
 {
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
 }
@@ -14,7 +16,7 @@ App::~App()
 {
 }
 
-bool App::Initialize(HWND hWnd, int Width, int Height, ScreenMode mode)
+bool App::Initialize(HINSTANCE hInstance, HWND hWnd, int Width, int Height, ScreenMode mode)
 {
 	try
 	{
@@ -79,7 +81,7 @@ bool App::Initialize(HWND hWnd, int Width, int Height, ScreenMode mode)
 			throw std::runtime_error("failed CreateDeviceEx");
 		}
 
-		InitializeResource();
+		InitializeResource(hInstance, hWnd);
 
 	}
 	catch (std::runtime_error e)
@@ -93,9 +95,11 @@ bool App::Initialize(HWND hWnd, int Width, int Height, ScreenMode mode)
 void App::Render()
 {
 	DWORD dwClearFlags = D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL;
-	DWORD dwClearColor = D3DCOLOR_RGBA(0x40, 0x80, 0xff, 0x00);
+	DWORD dwClearColor = D3DCOLOR_RGBA(0x00, 0x00, 0xff, 0x00);
 	pDevice->Clear(0, nullptr, dwClearFlags, dwClearColor, 1.0f, 0);
 	pDevice->BeginScene();
+
+	UpdateInput();
 
 	DrawAllResource();
 
@@ -109,16 +113,21 @@ void App::Terminate()
 	SafeRelease(pD3d);
 }
 
-void App::InitializeResource()
+void App::InitializeResource(HINSTANCE hInstance, HWND hwnd)
 {
 	mMesh = new MaterialMesh();
 	mMesh->Initialize(pDevice);
+	//mSprites.push_back(Sprite());
+	//mSprites[0].LoadTexture(pDevice, "sample0003.bmp");
 
 	mCamera = new Camera(pDevice);
 	mCamera->SetMatrices();
 
 	mTextFont = new TextFont("Test");
 	mTextFont->Initialize(pDevice);
+
+	mInput = new InputDevice();
+	mInput->Initialize(hInstance, hwnd);
 }
 
 void App::DrawAllResource()
@@ -127,6 +136,7 @@ void App::DrawAllResource()
 	{
 		mSprites[i].Draw(pDevice);
 	}
+	mInput->KeyUpDate();
 	mMesh->Draw(pDevice);
 	mCamera->Update();
 	mTextFont->Draw();
@@ -142,5 +152,25 @@ void App::run() {
 #endif
 		fps = 0;
 		timeBefore = GetTickCount();
+	}
+}
+
+void App::UpdateInput()
+{
+	if(mInput->GetKey(UP_KEY))
+	{
+		mCamera->MovePositionY(mInterval);
+	}
+	else if(mInput->GetKey(DOWN_KEY))
+	{
+		mCamera->MovePositionY(-mInterval);
+	}
+	else if (mInput->GetKey(LEFT_KEY))
+	{
+		mCamera->MovePositionX(mInterval);
+	}
+	else if (mInput->GetKey(RIGHT_KEY))
+	{
+		mCamera->MovePositionX(-mInterval);
 	}
 }

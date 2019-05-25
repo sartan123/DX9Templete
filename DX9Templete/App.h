@@ -4,6 +4,7 @@
 #include "MaterialMesh.h"
 #include "Camera.h"
 #include "TextFont.h"
+#include "InputDevice.h"
 #include <d3d9.h>
 #include <d3dx9.h>
 
@@ -22,8 +23,13 @@ private:
 	Camera* mCamera;
 	TextFont* mTextFont;
 
+	InputDevice* mInput;
+
+
 	DWORD timeBefore;
 	DWORD fps;
+
+	float mInterval;
 public:
 	enum ScreenMode
 	{
@@ -33,14 +39,16 @@ public:
 	};
 	App();
 	~App();
-	bool Initialize(HWND hwnd, int width, int height, ScreenMode mode);
+	bool Initialize(HINSTANCE hInstance, HWND hwnd, int width, int height, ScreenMode mode);
 
 	void Render();
 	void Terminate();
 
-	void InitializeResource();
+	void InitializeResource(HINSTANCE hInstance, HWND hwnd);
 	void DrawAllResource();
 
 	void run();
+
+	void UpdateInput();
 };
 

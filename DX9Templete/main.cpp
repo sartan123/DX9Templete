@@ -139,7 +139,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR szStr, IN
 	UpdateWindow(hWnd);
 
 	App app;
-	app.Initialize(hWnd, WINDOW_WIDTH, WINDOW_HEIGHT, screenMode);
+	app.Initialize(hInstance, hWnd, WINDOW_WIDTH, WINDOW_HEIGHT, screenMode);
 
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));

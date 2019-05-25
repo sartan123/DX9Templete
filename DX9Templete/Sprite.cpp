@@ -5,8 +5,8 @@
 Sprite::Sprite()
 :pTexture(nullptr)
 {
-	pos.x = 0.0f;
-	pos.y = 0.0f;
+	pos.x = 200.0f;
+	pos.y = 200.0f;
 }
 
 
