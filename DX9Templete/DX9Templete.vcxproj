@@ -27,6 +27,7 @@
     <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\stddef.cpp" />
     <ClCompile Include="src\TextFont.cpp" />
+    <ClCompile Include="src\TrianglePolygon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\App.h" />
@@ -36,10 +37,18 @@
     <ClInclude Include="src\Sprite.h" />
     <ClInclude Include="src\stddef.h" />
     <ClInclude Include="src\TextFont.h" />
+    <ClInclude Include="src\TrianglePolygon.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\BackGround.png" />
     <Image Include="resource\sample0003.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="resource\Shader\SamplePixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">3.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="resource\Shader\SampleVertexShader.hlsl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

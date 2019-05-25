@@ -2,6 +2,8 @@
 #include "stddef.h"
 #include <d3d9.h>
 #include <d3dx9.h>
+#include <DirectXMath.h>
+#include <DirectXPackedVector.h>
 
 class Camera
 {
@@ -11,8 +13,8 @@ private:
 	D3DXVECTOR3 m_Position; // カメラ座標
 	D3DXVECTOR3 m_Eye; // 注視点
 	D3DXQUATERNION m_Rotation;
-	D3DXMATRIX m_View;
-	D3DXMATRIX m_Projection;
+	D3DXMATRIX m_View; // ビュー行列
+	D3DXMATRIX m_Projection; //プロジェクション行列
 	float mRotation;
 	bool  mIsNeedUpdate;
 

@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "TextFont.h"
 #include "InputDevice.h"
+#include "TrianglePolygon.h"
 #include <d3d9.h>
 #include <d3dx9.h>
 
@@ -22,6 +23,8 @@ private:
 	MaterialMesh* mMesh;
 	Camera* mCamera;
 	TextFont* mTextFont;
+
+	TrianglePolygon* vertex;
 
 	InputDevice* mInput;
 

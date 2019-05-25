@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-
+using namespace DirectX;
 
 Camera::Camera(IDirect3DDevice9* device)
 : pDevice(device)
@@ -9,7 +9,7 @@ Camera::Camera(IDirect3DDevice9* device)
 , mIsNeedUpdate(false)
 {
 	pDevice->AddRef();
-	m_Position = D3DXVECTOR3(0.0f, 1.0f, -3.0f);
+	m_Position = D3DXVECTOR3(0.0f, 2.0f, -4.0f);
 	m_Eye = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_Rotation = D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f);
 	D3DXVECTOR3 up = D3DXVECTOR3(0, 1, 0);
@@ -17,6 +17,7 @@ Camera::Camera(IDirect3DDevice9* device)
 	pDevice->SetTransform(D3DTS_VIEW, &m_View);
 
 	D3DXMatrixIdentity(&m_Projection);
+	D3DXMatrixPerspectiveFovLH(&m_Projection, D3DX_PI / 4, 1.0f, 1.0f, 100.0f);
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_Projection);
 
 	SetLight();
@@ -38,9 +39,9 @@ void Camera::SetLight()
 	light.Diffuse.b = 1.0f;
 
 	D3DXVec3Normalize((D3DXVECTOR3*)&light.Direction, &vecLightDirUnnormalized);
-	light.Position.x = -1.0f;
-	light.Position.y = -1.0f;
-	light.Position.z = 2.0f;
+	light.Position.x = 0.0f;
+	light.Position.y = 2.0f;
+	light.Position.z = -4.0f;
 	light.Range = 1000.0f;
 	pDevice->SetLight(0, &light);
 	pDevice->LightEnable(0, TRUE);
@@ -91,6 +92,12 @@ void Camera::SetProjectionPerspective(const float inFovY, const float inWidth, c
 
 void Camera::Update()
 {
+	D3DXMATRIX mat, matProj;
+	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 4, 1.0f, 1.0f, 100.0f);
+	D3DXMatrixMultiply(&mat, &m_View, &matProj);
+	D3DXMatrixTranspose(&mat, &mat);
+	pDevice->SetVertexShaderConstantF(0, (float*)&mat, 4);
+
 	if (!mIsNeedUpdate) return;
 	D3DXMATRIX ZRotMatV;
 	D3DXMatrixRotationZ(&ZRotMatV, mZRotDef);

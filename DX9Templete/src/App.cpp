@@ -115,8 +115,8 @@ void App::Terminate()
 
 void App::InitializeResource(HINSTANCE hInstance, HWND hwnd)
 {
-	mMesh = new MaterialMesh();
-	mMesh->Initialize(pDevice);
+	//mMesh = new MaterialMesh();
+	//mMesh->Initialize(pDevice);
 	//mSprites.push_back(Sprite());
 	//mSprites[0].LoadTexture(pDevice, "sample0003.bmp");
 
@@ -128,6 +128,11 @@ void App::InitializeResource(HINSTANCE hInstance, HWND hwnd)
 
 	mInput = new InputDevice();
 	mInput->Initialize(hInstance, hwnd);
+
+	vertex = new TrianglePolygon();
+	vertex->SetVertexBuffer(pDevice);
+	vertex->SetVertexDeclaration(pDevice);
+	vertex->LoadShader(pDevice);
 }
 
 void App::DrawAllResource()
@@ -137,9 +142,10 @@ void App::DrawAllResource()
 		mSprites[i].Draw(pDevice);
 	}
 	mInput->KeyUpDate();
-	mMesh->Draw(pDevice);
+	//mMesh->Draw(pDevice);
 	mCamera->Update();
 	mTextFont->Draw();
+	vertex->Draw(pDevice);
 }
 
 void App::run() {

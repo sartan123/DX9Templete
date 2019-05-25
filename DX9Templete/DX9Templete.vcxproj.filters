@@ -7,6 +7,12 @@
     <Filter Include="Resource">
       <UniqueIdentifier>{c5b06415-3d5e-4f43-8664-97c38ea94313}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Shader">
+      <UniqueIdentifier>{5ffa244b-b091-4155-949c-0e8dda884dc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Image">
+      <UniqueIdentifier>{c240201d-c49d-4b32-b0bb-1ee5321d10e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\App.cpp">
@@ -33,6 +39,9 @@
     <ClCompile Include="src\TextFont.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\TrianglePolygon.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\App.h">
@@ -56,13 +65,24 @@
     <ClInclude Include="src\TextFont.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="src\TrianglePolygon.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\BackGround.png">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Image</Filter>
     </Image>
     <Image Include="resource\sample0003.bmp">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Image</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="resource\Shader\SamplePixelShader.hlsl">
+      <Filter>Resource\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\Shader\SampleVertexShader.hlsl">
+      <Filter>Resource\Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
