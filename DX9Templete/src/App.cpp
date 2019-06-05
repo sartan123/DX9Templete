@@ -6,7 +6,7 @@ App::App()
 , mInput(nullptr)
 , timeBefore(0)
 , fps(0)
-, mInterval(0.5f)
+, mInterval(5.5f)
 {
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
 }
@@ -115,11 +115,6 @@ void App::Terminate()
 
 void App::InitializeResource(HINSTANCE hInstance, HWND hwnd)
 {
-	//mMesh = new MaterialMesh();
-	//mMesh->Initialize(pDevice);
-	//mSprites.push_back(Sprite());
-	//mSprites[0].LoadTexture(pDevice, "sample0003.bmp");
-
 	mCamera = new Camera(pDevice);
 	mCamera->SetMatrices();
 
@@ -129,23 +124,20 @@ void App::InitializeResource(HINSTANCE hInstance, HWND hwnd)
 	mInput = new InputDevice();
 	mInput->Initialize(hInstance, hwnd);
 
-	vertex = new TrianglePolygon();
-	vertex->SetVertexBuffer(pDevice);
-	vertex->SetVertexDeclaration(pDevice);
-	vertex->LoadShader(pDevice);
+	square = new Square();
+	square->Initialize(pDevice);
+
+
 }
 
 void App::DrawAllResource()
 {
-	for (int i = 0; i < mSprites.size(); i++)
-	{
-		mSprites[i].Draw(pDevice);
-	}
 	mInput->KeyUpDate();
-	//mMesh->Draw(pDevice);
+
 	mCamera->Update();
 	mTextFont->Draw();
-	vertex->Draw(pDevice);
+
+	square->Draw(pDevice);
 }
 
 void App::run() {

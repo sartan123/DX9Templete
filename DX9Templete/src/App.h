@@ -6,6 +6,7 @@
 #include "TextFont.h"
 #include "InputDevice.h"
 #include "TrianglePolygon.h"
+#include "Square.h"
 #include <d3d9.h>
 #include <d3dx9.h>
 
@@ -25,6 +26,8 @@ private:
 	TextFont* mTextFont;
 
 	TrianglePolygon* vertex;
+
+	Square* square;
 
 	InputDevice* mInput;
 

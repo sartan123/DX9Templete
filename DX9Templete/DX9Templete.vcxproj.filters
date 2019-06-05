@@ -42,6 +42,12 @@
     <ClCompile Include="src\TrianglePolygon.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\Square.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\App.h">
@@ -68,6 +74,12 @@
     <ClInclude Include="src\TrianglePolygon.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="src\Square.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\BackGround.png">
@@ -82,6 +94,12 @@
       <Filter>Resource\Shader</Filter>
     </FxCompile>
     <FxCompile Include="resource\Shader\SampleVertexShader.hlsl">
+      <Filter>Resource\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\Shader\SquarePixelShader.hlsl">
+      <Filter>Resource\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\Shader\SquareVertexShader.hlsl">
       <Filter>Resource\Shader</Filter>
     </FxCompile>
   </ItemGroup>
