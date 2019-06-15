@@ -20,11 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\BasicTexture.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\InputDevice.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MaterialMesh.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\Square.cpp" />
     <ClCompile Include="src\stddef.cpp" />
@@ -33,10 +35,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\App.h" />
+    <ClInclude Include="src\BasicTexture.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\InputDevice.h" />
     <ClInclude Include="src\MaterialMesh.h" />
+    <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\Sprite.h" />
     <ClInclude Include="src\Square.h" />
     <ClInclude Include="src\stddef.h" />
@@ -64,6 +68,26 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="resource\Shader\SquareVertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">3.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="resource\Shader\TexturePixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">3.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="resource\Shader\TextureVertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">3.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>

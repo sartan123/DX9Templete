@@ -4,6 +4,7 @@ App::App()
 : pD3d(nullptr)
 , pDevice(nullptr)
 , mInput(nullptr)
+, mScene(nullptr)
 , timeBefore(0)
 , fps(0)
 , mInterval(5.5f)
@@ -95,11 +96,11 @@ bool App::Initialize(HINSTANCE hInstance, HWND hWnd, int Width, int Height, Scre
 void App::Render()
 {
 	DWORD dwClearFlags = D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL;
-	DWORD dwClearColor = D3DCOLOR_RGBA(0x00, 0x00, 0xff, 0x00);
+	DWORD dwClearColor = D3DCOLOR_RGBA(0x00, 0x00, 0x00, 0x00);
 	pDevice->Clear(0, nullptr, dwClearFlags, dwClearColor, 1.0f, 0);
 	pDevice->BeginScene();
 
-	UpdateInput();
+	//UpdateInput();
 
 	DrawAllResource();
 
@@ -115,29 +116,13 @@ void App::Terminate()
 
 void App::InitializeResource(HINSTANCE hInstance, HWND hwnd)
 {
-	mCamera = new Camera(pDevice);
-	mCamera->SetMatrices();
-
-	mTextFont = new TextFont("Test");
-	mTextFont->Initialize(pDevice);
-
-	mInput = new InputDevice();
-	mInput->Initialize(hInstance, hwnd);
-
-	square = new Square();
-	square->Initialize(pDevice);
-
-
+	mScene = new Scene();
+	mScene->Create(pDevice);
 }
 
 void App::DrawAllResource()
 {
-	mInput->KeyUpDate();
-
-	mCamera->Update();
-	mTextFont->Draw();
-
-	square->Draw(pDevice);
+	mScene->Draw(pDevice);
 }
 
 void App::run() {
@@ -146,7 +131,6 @@ void App::run() {
 #ifdef _DEBUG // デバッグ用(デバッガにFSP出す)
 		std::stringstream stream;
 		stream << fps << " FPS" << std::endl;
-		mTextFont->ChangeText(TEXT(stream.str().c_str()));
 #endif
 		fps = 0;
 		timeBefore = GetTickCount();
@@ -155,31 +139,31 @@ void App::run() {
 
 void App::UpdateInput()
 {
-	if(mInput->GetKey(UP_KEY))
-	{
-		mCamera->MovePositionY(mInterval);
-	}
-	else if(mInput->GetKey(DOWN_KEY))
-	{
-		mCamera->MovePositionY(-mInterval);
-	}
-	else if (mInput->GetKey(LEFT_KEY))
-	{
-		mCamera->MovePositionX(mInterval);
-	}
-	else if (mInput->GetKey(RIGHT_KEY))
-	{
-		mCamera->MovePositionX(-mInterval);
-	}
-	else
-	{
-		mInput->GetMouseState();
-		if (mInput->IsClickRightMouse())
-		{
-			int x = mInput->GetMouseStateX();
-			int y = mInput->GetMouseStateY();
-			mCamera->MovePositionX(x);
-			mCamera->MovePositionY(y);
-		}
-	}
+	//if(mInput->GetKey(UP_KEY))
+	//{
+	//	mCamera->MovePositionY(mInterval);
+	//}
+	//else if(mInput->GetKey(DOWN_KEY))
+	//{
+	//	mCamera->MovePositionY(-mInterval);
+	//}
+	//else if (mInput->GetKey(LEFT_KEY))
+	//{
+	//	mCamera->MovePositionX(mInterval);
+	//}
+	//else if (mInput->GetKey(RIGHT_KEY))
+	//{
+	//	mCamera->MovePositionX(-mInterval);
+	//}
+	//else
+	//{
+	//	mInput->GetMouseState();
+	//	if (mInput->IsClickRightMouse())
+	//	{
+	//		int x = mInput->GetMouseStateX();
+	//		int y = mInput->GetMouseStateY();
+	//		mCamera->MovePositionX(x);
+	//		mCamera->MovePositionY(y);
+	//	}
+	//}
 }

@@ -1,12 +1,7 @@
 #pragma once
 #include "stddef.h"
-#include "Sprite.h"
-#include "MaterialMesh.h"
-#include "Camera.h"
-#include "TextFont.h"
+#include "Scene.h"
 #include "InputDevice.h"
-#include "TrianglePolygon.h"
-#include "Square.h"
 #include <d3d9.h>
 #include <d3dx9.h>
 
@@ -20,16 +15,8 @@ private:
 	IDirect3D9Ex* pD3d;
 	IDirect3DDevice9Ex* pDevice;
 
-	std::vector<Sprite> mSprites;
-	MaterialMesh* mMesh;
-	Camera* mCamera;
-	TextFont* mTextFont;
-
-	TrianglePolygon* vertex;
-
-	Square* square;
-
 	InputDevice* mInput;
+	Scene* mScene;
 
 
 	DWORD timeBefore;

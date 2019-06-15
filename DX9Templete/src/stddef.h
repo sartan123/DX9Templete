@@ -30,3 +30,12 @@ static std::wstring GetExecutionDirectory()
 	std::wstring strPath(filePath, p);
 	return strPath;
 }
+
+static std::string GetStringExecutionDirectory()
+{
+	wchar_t filePath[MAX_PATH];
+	GetModuleFileNameW(NULL, filePath, sizeof(filePath));
+	wchar_t* p = wcsrchr(filePath, L'\\');
+	std::string strPath(filePath, p);
+	return strPath;
+}
