@@ -1,98 +1,72 @@
 #include "Square.h"
 
 Square::Square()
-:mVertexDec(nullptr)
-,mVertexBuffer(nullptr)
+: TrianglePolygon()
 {
 }
 
 
 Square::~Square()
 {
+	Destroy();
 }
 
-HRESULT Square::Initialize(IDirect3DDevice9* pDevice)
+void Square::Draw(LPDIRECT3DDEVICE9 device)
 {
-	const Vertex vertices[] = {
-		{DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f), DirectX::PackedVector::XMCOLOR(0xff00ff00)},
-		{DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f), DirectX::PackedVector::XMCOLOR(0x0000ffff)},
-		{DirectX::XMFLOAT3(1.0f, 0.0f, 0.0f), DirectX::PackedVector::XMCOLOR(0xffff0000)},
-		{DirectX::XMFLOAT3(1.0f, 1.0f, 0.0f), DirectX::PackedVector::XMCOLOR(0xff0000ff)},
-	};
-	//const Vertex vertices[] = {
-	//	DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f),
-	//	DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f),
-	//	DirectX::XMFLOAT3(1.0f, 0.0f, 0.0f), 
-	//	DirectX::XMFLOAT3(1.0f, 1.0f, 0.0f),
-	//};
-
-	D3DVERTEXELEMENT9 vertex[] = 
+	if (device == 0)
 	{
-		{ 0, 0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-		{ 0, 12, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR, 0},
-		D3DDECL_END()
-	};
+		return;
+	}
+	if (mVertexBuffer == 0)
+	{
+		return;
+	}
 
-	pDevice->CreateVertexDeclaration(vertex, &mVertexDec);
-	if (FAILED(pDevice->CreateVertexBuffer(sizeof(vertices), 0, 0, D3DPOOL_DEFAULT, &mVertexBuffer, nullptr)))
+	device->SetVertexDeclaration(mVertexDec);
+	device->SetStreamSource(0, mVertexBuffer, 0, sizeof(VERTEX_POS));
+	device->SetStreamSource(1, mVertexColorBuffer, 0, sizeof(VERTEX_COLOR));
+
+	mEffect->SetTechnique(mTechHandle);
+	mEffect->SetMatrix(mWorldHandle, &(m_world));
+	mEffect->SetMatrix(mViewingHandle, &(m_view));
+	mEffect->SetMatrix(mProjectionHandle, &(m_projection));
+	mEffect->CommitChanges();
+
+	mEffect->Begin(0, 0);
+	mEffect->BeginPass(0);
+
+	device->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+
+	mEffect->EndPass();
+	mEffect->End();
+}
+
+HRESULT Square::SetPrimitiveInfo(IDirect3DDevice9* device)
+{
+	mPrimitiveCount = 4;
+
+	if (FAILED(device->CreateVertexBuffer(mPrimitiveCount * sizeof(VERTEX_POS), D3DUSAGE_WRITEONLY, 0, D3DPOOL_DEFAULT, &mVertexBuffer, NULL)))
 	{
 		return E_FAIL;
 	}
-	Vertex* v;
-	mVertexBuffer->Lock(0, 0, (void**)&v, 0);
-	memcpy_s(v, sizeof(vertices), vertices, sizeof(vertices));
+
+	mVertexBuffer->Lock(0, 0, (void**)&mVertexPos, 0);
+	mVertexPos[0].p = D3DXVECTOR3(-1.5f, 1.5f, 0.0f);
+	mVertexPos[1].p = D3DXVECTOR3(1.5f, 1.5f, 0.0f);
+	mVertexPos[2].p = D3DXVECTOR3(-1.5f, -1.5f, 0.0f);
+	mVertexPos[3].p = D3DXVECTOR3(1.5f, -1.5f, 0.0f);
 	mVertexBuffer->Unlock();
 
-	SetVertexShader(pDevice);
-	SetPixelShader(pDevice);
+	if (FAILED(device->CreateVertexBuffer(mPrimitiveCount * sizeof(VERTEX_COLOR), D3DUSAGE_WRITEONLY, 0, D3DPOOL_DEFAULT, &mVertexColorBuffer, NULL)))
+	{
+		return E_FAIL;
+	}
+	mVertexColorBuffer->Lock(0, 0, (void**)&mVertexColor, 0);
+	mVertexColor[0].color = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
+	mVertexColor[1].color = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
+	mVertexColor[2].color = D3DXVECTOR4(0.0f, 0.0f, 1.0f, 1.0f);
+	mVertexColor[3].color = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
+	mVertexColorBuffer->Unlock();
 
 	return S_OK;
-}
-
-void Square::Draw(IDirect3DDevice9* pDevice)
-{
-	pDevice->SetVertexShader(pVertexShader);
-	pDevice->SetPixelShader(pPixelShader);
-	pDevice->SetVertexDeclaration(mVertexDec);
-	pDevice->SetStreamSource(0, mVertexBuffer, 0, sizeof(Vertex));
-	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
-}
-
-void Square::SetVertexShader(IDirect3DDevice9* pDevice)
-{
-	std::wstring path = GetExecutionDirectory();
-	path += std::wstring(L"\\");
-	path += L"SampleVertexShader.cso";
-	std::ifstream infile(path, std::ifstream::binary);
-	if (!infile)
-	{
-		throw _T("error");
-	}
-	std::vector<uint8_t> buf;
-	int size = static_cast<int>(infile.seekg(0, std::ifstream::end).tellg());
-	buf.resize(size);
-	infile.seekg(0, std::ifstream::beg);
-	infile.read(reinterpret_cast<char*>(buf.data()), size);
-
-	pDevice->CreateVertexShader(reinterpret_cast<DWORD*>(buf.data()), &pVertexShader);
-}
-
-void Square::SetPixelShader(IDirect3DDevice9* pDevice)
-{
-	std::wstring path = GetExecutionDirectory();
-	path += std::wstring(L"\\");
-	path += L"SquarePixelShader.cso";
-	std::ifstream infile(path, std::ifstream::binary);
-	if (!infile)
-	{
-		throw _T("error");
-	}
-	std::vector<uint8_t> buf;
-	int size = static_cast<int>(infile.seekg(0, std::ifstream::end).tellg());
-	buf.resize(size);
-	infile.seekg(0, std::ifstream::beg);
-	infile.read(reinterpret_cast<char*>(buf.data()), size);
-
-	pDevice->CreatePixelShader(reinterpret_cast<DWORD*>(buf.data()), &pPixelShader);
 }
