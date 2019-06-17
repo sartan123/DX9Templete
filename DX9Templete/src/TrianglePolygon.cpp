@@ -63,7 +63,7 @@ void TrianglePolygon::SetViewMatrix()
 {
 	D3DXMatrixIdentity(&m_view);
 	D3DXMatrixLookAtLH(&m_view,
-		&D3DXVECTOR3(0.0f, 0.0f, -10.0f),
+		&D3DXVECTOR3(0.0f, 0.0f, -5.0f),
 		&D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		&D3DXVECTOR3(0.0f, 1.0f, 0.0f));
 }

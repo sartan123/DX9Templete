@@ -1,6 +1,7 @@
 #include "stddef.h"
 #include "Square.h"
 #include "BasicTexture.h"
+#include "MultiTexture.h"
 #include <d3d9.h>
 #include <d3dx9.h>
 
@@ -16,4 +17,5 @@ private:
 	Square *mSquare;
 	TrianglePolygon *mTriangle;
 	BasicTexture *mTexture;
+	MultiTexture * mMultiTexture;
 };

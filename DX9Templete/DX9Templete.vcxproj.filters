@@ -54,6 +54,9 @@
     <ClCompile Include="src\Scene.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\MultiTexture.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\App.h">
@@ -92,12 +95,21 @@
     <ClInclude Include="src\Scene.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="src\MultiTexture.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\BackGround.png">
       <Filter>Resource\Image</Filter>
     </Image>
     <Image Include="resource\sample0003.bmp">
+      <Filter>Resource\Image</Filter>
+    </Image>
+    <Image Include="resource\Image\tex0.bmp">
+      <Filter>Resource\Image</Filter>
+    </Image>
+    <Image Include="resource\Image\tex1.bmp">
       <Filter>Resource\Image</Filter>
     </Image>
   </ItemGroup>
@@ -118,6 +130,15 @@
       <Filter>Resource\Shader</Filter>
     </FxCompile>
     <FxCompile Include="resource\Shader\TexturePixelShader.hlsl">
+      <Filter>Resource\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\Shader\basic.fx">
+      <Filter>Resource\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\Shader\texture_shader.fx">
+      <Filter>Resource\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\Shader\multi_texture_shader.fx">
       <Filter>Resource\Shader</Filter>
     </FxCompile>
   </ItemGroup>
