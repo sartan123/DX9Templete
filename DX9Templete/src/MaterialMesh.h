@@ -1,17 +1,35 @@
 #pragma once
 #include "stddef.h"
-#include <d3d9.h>
-#include <d3dx9.h>
+#include "GameObject.h"
 
-class MaterialMesh
+class MaterialMesh : public GameObject
 {
 private:
-	D3DMATERIAL9 material;
-	ID3DXMesh *pMesh;
+	LPD3DXMESH				m_pMesh;
+	LPD3DXBUFFER			m_pD3DXMtrlBuffer;
+	DWORD					m_numMtrl;
+	LPDIRECT3DTEXTURE9*		m_pTextures;
+
+	LPD3DXEFFECT	m_pFX;
+
+	D3DXHANDLE	m_hTech;
+
+	D3DXHANDLE	m_hWorld;
+	D3DXHANDLE	m_hWorldInv;
+	D3DXHANDLE	m_hView;
+	D3DXHANDLE	m_hProj;
+	D3DXHANDLE	m_hColor0;
+	D3DXHANDLE	m_hColor1;
+	D3DXHANDLE	m_hLightDir;
+	D3DXHANDLE	m_hTexture;
 public:
 	MaterialMesh();
 	~MaterialMesh();
-	HRESULT Initialize(IDirect3DDevice9* pDevice);
-	void Draw(IDirect3DDevice9* pDevice);
+	virtual HRESULT Create(LPDIRECT3DDEVICE9 device);
+	virtual void Draw(IDirect3DDevice9* device);
+	virtual void SetWorldMatrix() {}
+	virtual void SetViewMatrix() {}
+	virtual HRESULT SetProjectionMatrix(IDirect3DDevice9* device) { return S_OK; }
+	HRESULT LoadMeshFile(LPDIRECT3DDEVICE9 device);
 };
 

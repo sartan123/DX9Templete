@@ -5,14 +5,22 @@
 
 class GameObject
 {
-private:
-	IDirect3DDevice9* device;
 public:
-	GameObject(IDirect3DDevice9* pDevice);
+	GameObject();
 	~GameObject();
-	virtual HRESULT Initialize() = 0;
-	virtual void Draw() = 0;
+	virtual HRESULT Create(LPDIRECT3DDEVICE9 device) = 0;
+	virtual void Draw(IDirect3DDevice9* device) = 0;
+	virtual void SetWorldMatrix();
+	virtual void SetViewMatrix() = 0;
+	virtual HRESULT SetProjectionMatrix(IDirect3DDevice9* device);
 protected:
-	IDirect3DDevice9* GetDevice() { return device; }
+	D3DXMATRIX m_world;
+	D3DXMATRIX m_world_inv;
+	D3DXMATRIX m_projection;
+	D3DXMATRIX m_view;
+
+	D3DXMATRIX m_scale;
+	D3DXMATRIX m_rotate;
+	D3DXMATRIX m_transelate;
 };
 

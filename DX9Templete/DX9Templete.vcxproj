@@ -27,6 +27,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MaterialMesh.cpp" />
     <ClCompile Include="src\MultiTexture.cpp" />
+    <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\Square.cpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="src\InputDevice.h" />
     <ClInclude Include="src\MaterialMesh.h" />
     <ClInclude Include="src\MultiTexture.h" />
+    <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\Sprite.h" />
     <ClInclude Include="src\Square.h" />
@@ -57,6 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resource\Shader\basic.fx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="resource\Shader\light_diffuse.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="resource\Shader\multi_texture_shader.fx">

@@ -2,6 +2,8 @@
 #include "Square.h"
 #include "BasicTexture.h"
 #include "MultiTexture.h"
+#include "MaterialMesh.h"
+#include "Particle.h"
 #include <d3d9.h>
 #include <d3dx9.h>
 
@@ -18,4 +20,6 @@ private:
 	TrianglePolygon *mTriangle;
 	BasicTexture *mTexture;
 	MultiTexture * mMultiTexture;
+	MaterialMesh *mMesh;
+	Particle	*mParticle;
 };

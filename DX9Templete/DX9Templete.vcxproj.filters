@@ -57,6 +57,9 @@
     <ClCompile Include="src\MultiTexture.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\Particle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\App.h">
@@ -96,6 +99,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="src\MultiTexture.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Particle.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
@@ -139,6 +145,9 @@
       <Filter>Resource\Shader</Filter>
     </FxCompile>
     <FxCompile Include="resource\Shader\multi_texture_shader.fx">
+      <Filter>Resource\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\Shader\light_diffuse.fx">
       <Filter>Resource\Shader</Filter>
     </FxCompile>
   </ItemGroup>

@@ -4,6 +4,7 @@ Scene::Scene()
 :mSquare(nullptr)
 , mTriangle(nullptr)
 , mMultiTexture(nullptr)
+, mParticle(nullptr)
 {
 }
 
@@ -33,6 +34,12 @@ HRESULT Scene::Create(LPDIRECT3DDEVICE9 device)
 	mMultiTexture = new MultiTexture();
 	mMultiTexture->Create(device);
 
+	mMesh = new MaterialMesh();
+	mMesh->Create(device);
+
+	mParticle = new Particle();
+	mParticle->Create(device);
+
 	return S_OK;
 }
 
@@ -44,5 +51,9 @@ void Scene::Draw(LPDIRECT3DDEVICE9 device)
 
 	//mTexture->Draw(device);
 
-	mMultiTexture->Draw(device);
+	//mMultiTexture->Draw(device);
+
+	//mMesh->Draw(device);
+
+	mParticle->Draw(device);
 }
