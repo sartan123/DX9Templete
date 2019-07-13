@@ -47,7 +47,7 @@ void BasicVS( 	float3 in_pos : POSITION,
 	// í∏ì_Ç≤Ç∆ÇÃêFÇÃåvéZ
 	float4 local_light;
 	local_light =  normalize( mul(g_light_dir, g_world_inv));
-	out_color = saturate(g_color0 + g_color1 * max(0, dot(local_light, in_normal)));
+	out_color = saturate(g_color0 + g_color1 * max(0.2, dot(local_light, in_normal)));
 }
 
 //------------------------------------------------

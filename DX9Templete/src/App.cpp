@@ -3,11 +3,9 @@
 App::App()
 : pD3d(nullptr)
 , pDevice(nullptr)
-, mInput(nullptr)
 , mScene(nullptr)
 , timeBefore(0)
 , fps(0)
-, mInterval(5.5f)
 {
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
 }
@@ -100,8 +98,6 @@ void App::Render()
 	pDevice->Clear(0, nullptr, dwClearFlags, dwClearColor, 1.0f, 0);
 	pDevice->BeginScene();
 
-	//UpdateInput();
-
 	DrawAllResource();
 
 	pDevice->EndScene();
@@ -117,7 +113,7 @@ void App::Terminate()
 void App::InitializeResource(HINSTANCE hInstance, HWND hwnd)
 {
 	mScene = new Scene();
-	mScene->Create(pDevice);
+	mScene->Create(pDevice, hInstance, hwnd);
 }
 
 void App::DrawAllResource()
@@ -135,35 +131,4 @@ void App::run() {
 		fps = 0;
 		timeBefore = GetTickCount();
 	}
-}
-
-void App::UpdateInput()
-{
-	//if(mInput->GetKey(UP_KEY))
-	//{
-	//	mCamera->MovePositionY(mInterval);
-	//}
-	//else if(mInput->GetKey(DOWN_KEY))
-	//{
-	//	mCamera->MovePositionY(-mInterval);
-	//}
-	//else if (mInput->GetKey(LEFT_KEY))
-	//{
-	//	mCamera->MovePositionX(mInterval);
-	//}
-	//else if (mInput->GetKey(RIGHT_KEY))
-	//{
-	//	mCamera->MovePositionX(-mInterval);
-	//}
-	//else
-	//{
-	//	mInput->GetMouseState();
-	//	if (mInput->IsClickRightMouse())
-	//	{
-	//		int x = mInput->GetMouseStateX();
-	//		int y = mInput->GetMouseStateY();
-	//		mCamera->MovePositionX(x);
-	//		mCamera->MovePositionY(y);
-	//	}
-	//}
 }

@@ -23,49 +23,21 @@ HRESULT MaterialMesh::Create(LPDIRECT3DDEVICE9 device)
 		return E_FAIL;
 	}
 
-	// ビューポートの取得
-	D3DVIEWPORT9    vp;
-	if (FAILED(device->GetViewport(&vp))) {
-		return E_FAIL;
-	}
+	SetWorldMatrix();
 
-	// アスペクト比の計算
-	float aspect;
-	aspect = (float)vp.Width / (float)vp.Height;
-
-	// プロジェクション行列の初期化
-	D3DXMatrixIdentity(&m_projection);
-	D3DXMatrixPerspectiveFovLH(&m_projection, D3DXToRadian(45.0f), aspect, 1.0f, 1000.0f);
-
-	// ビューイング行列の初期化
 	D3DXMatrixIdentity(&m_view);
 	D3DXMatrixLookAtLH(&m_view,
 		&D3DXVECTOR3(5.0, 5.0f, -5.0f),
 		&D3DXVECTOR3(0.0f, 0.0f, 0.0f),
 		&D3DXVECTOR3(0.0f, 1.0f, 0.0f));
 
-	D3DXMatrixIdentity(&m_world);
+	SetProjectionMatrix(device);
 
-	// シェーダプログラムの読み込みとコンパイル
-	LPD3DXBUFFER	errors = 0;
-	D3DXCreateEffectFromFile(device, TEXT("..\\DX9Templete\\resource\\Shader\\light_diffuse.fx"), 0, 0, D3DXSHADER_DEBUG, 0, &m_pFX, &errors);
-	if (errors) {
+	if (FAILED(SetShader(device)))
+	{
 		return E_FAIL;
 	}
-
-	// シェーダプログラムへテクニックへのハンドルの取得
-	m_hTech = m_pFX->GetTechniqueByName("BasicTech");
-
-	// シェーダープログラムのグローバル変数のハンドルの取得
-	m_hWorld = m_pFX->GetParameterByName(0, "g_world");
-	m_hWorldInv = m_pFX->GetParameterByName(0, "g_world_inv");
-	m_hView = m_pFX->GetParameterByName(0, "g_view");
-	m_hProj = m_pFX->GetParameterByName(0, "g_proj");
-	m_hColor0 = m_pFX->GetParameterByName(0, "g_color0");
-	m_hColor1 = m_pFX->GetParameterByName(0, "g_color1");
-	m_hLightDir = m_pFX->GetParameterByName(0, "g_light_dir");
-	m_hTexture = m_pFX->GetParameterByName(0, "g_texture");
-
+	
 	return S_OK;
 }
 
@@ -77,6 +49,10 @@ void MaterialMesh::Draw(IDirect3DDevice9* device)
 
 	// テクニックの設定（シェーダプログラムの設定）
 	m_pFX->SetTechnique(m_hTech);
+
+	mRotate += 1.5;
+	D3DXMatrixRotationY(&m_rotate, D3DXToRadian(mRotate));
+	m_world = m_scale * m_rotate * m_transelate;
 
 	// シェーダーのグローバル変数の値の設定
 	m_pFX->SetMatrix(m_hWorld, &m_world);
@@ -170,5 +146,30 @@ HRESULT MaterialMesh::LoadMeshFile(LPDIRECT3DDEVICE9 device)
 			m_pTextures[i] = 0;
 		}
 	}
+	return S_OK;
+}
+
+HRESULT MaterialMesh::SetShader(IDirect3DDevice9* device)
+{
+	// シェーダプログラムの読み込みとコンパイル
+	LPD3DXBUFFER	errors = 0;
+	D3DXCreateEffectFromFile(device, TEXT("..\\DX9Templete\\resource\\Shader\\light_diffuse.fx"), 0, 0, D3DXSHADER_DEBUG, 0, &m_pFX, &errors);
+	if (errors) {
+		return E_FAIL;
+	}
+
+	// シェーダプログラムへテクニックへのハンドルの取得
+	m_hTech = m_pFX->GetTechniqueByName("BasicTech");
+
+	// シェーダープログラムのグローバル変数のハンドルの取得
+	m_hWorld = m_pFX->GetParameterByName(0, "g_world");
+	m_hWorldInv = m_pFX->GetParameterByName(0, "g_world_inv");
+	m_hView = m_pFX->GetParameterByName(0, "g_view");
+	m_hProj = m_pFX->GetParameterByName(0, "g_proj");
+	m_hColor0 = m_pFX->GetParameterByName(0, "g_color0");
+	m_hColor1 = m_pFX->GetParameterByName(0, "g_color1");
+	m_hLightDir = m_pFX->GetParameterByName(0, "g_light_dir");
+	m_hTexture = m_pFX->GetParameterByName(0, "g_texture");
+
 	return S_OK;
 }

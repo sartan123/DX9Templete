@@ -5,6 +5,7 @@ Scene::Scene()
 , mTriangle(nullptr)
 , mMultiTexture(nullptr)
 , mParticle(nullptr)
+, mInterval(5.5f)
 {
 }
 
@@ -20,7 +21,7 @@ void Scene::Destroy()
 	mMultiTexture->Destroy();
 }
 
-HRESULT Scene::Create(LPDIRECT3DDEVICE9 device)
+HRESULT Scene::Create(LPDIRECT3DDEVICE9 device, HINSTANCE hInstance, HWND hwnd)
 {
 	mSquare = new Square();
 	mSquare->Create(device);
@@ -40,6 +41,9 @@ HRESULT Scene::Create(LPDIRECT3DDEVICE9 device)
 	mParticle = new Particle();
 	mParticle->Create(device);
 
+	mInput = new InputDevice();
+	mInput->Initialize(hInstance, hwnd);
+
 	return S_OK;
 }
 
@@ -53,7 +57,40 @@ void Scene::Draw(LPDIRECT3DDEVICE9 device)
 
 	//mMultiTexture->Draw(device);
 
-	//mMesh->Draw(device);
+	UpdateInput();
 
-	mParticle->Draw(device);
+	mMesh->Draw(device);
+
+	//mParticle->Draw(device);
+}
+
+void Scene::UpdateInput()
+{
+	if(mInput->GetKey(UP_KEY))
+	{
+		mCamera->MovePositionY(mInterval);
+	}
+	else if(mInput->GetKey(DOWN_KEY))
+	{
+		mCamera->MovePositionY(-mInterval);
+	}
+	else if (mInput->GetKey(LEFT_KEY))
+	{
+		mCamera->MovePositionX(mInterval);
+	}
+	else if (mInput->GetKey(RIGHT_KEY))
+	{
+		mCamera->MovePositionX(-mInterval);
+	}
+	else
+	{
+		mInput->GetMouseState();
+		if (mInput->IsClickRightMouse())
+		{
+			int x = mInput->GetMouseStateX();
+			int y = mInput->GetMouseStateY();
+			mCamera->MovePositionX(x);
+			mCamera->MovePositionY(y);
+		}
+	}
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include "stddef.h"
 #include "Scene.h"
-#include "InputDevice.h"
 #include <d3d9.h>
 #include <d3dx9.h>
 
@@ -15,14 +14,11 @@ private:
 	IDirect3D9Ex* pD3d;
 	IDirect3DDevice9Ex* pDevice;
 
-	InputDevice* mInput;
 	Scene* mScene;
 
 
 	DWORD timeBefore;
 	DWORD fps;
-
-	float mInterval;
 public:
 	enum ScreenMode
 	{
@@ -41,7 +37,5 @@ public:
 	void DrawAllResource();
 
 	void run();
-
-	void UpdateInput();
 };
 

@@ -23,7 +23,7 @@ void BasicVS(float3 in_pos : POSITION,
 	out_pos = mul(out_pos, g_projection);
 
 	// ’¸“_‚ÌF‚ÌŒˆ’è
-	out_color = in_col;
+	out_color = float4(1.0f, 1.0f, 1.0f, 1.0f);
 
 }
 

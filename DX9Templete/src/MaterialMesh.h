@@ -10,6 +10,8 @@ private:
 	DWORD					m_numMtrl;
 	LPDIRECT3DTEXTURE9*		m_pTextures;
 
+	float mRotate;
+
 	LPD3DXEFFECT	m_pFX;
 
 	D3DXHANDLE	m_hTech;
@@ -27,9 +29,7 @@ public:
 	~MaterialMesh();
 	virtual HRESULT Create(LPDIRECT3DDEVICE9 device);
 	virtual void Draw(IDirect3DDevice9* device);
-	virtual void SetWorldMatrix() {}
-	virtual void SetViewMatrix() {}
-	virtual HRESULT SetProjectionMatrix(IDirect3DDevice9* device) { return S_OK; }
+	virtual HRESULT SetShader(IDirect3DDevice9* device);
 	HRESULT LoadMeshFile(LPDIRECT3DDEVICE9 device);
 };
 
